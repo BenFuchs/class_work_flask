@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block content %}
+  <h1>Cars List</h1>
+  <p1>
+    <ul>
+        <!-- loop that itterates over the sql table and prints all the cars into the list -->
+        {% for car in cars %}
+          <li><button onclick="delUser('{{ car[0] }}')">{{ car[0] }} - DELETE</button> - {{ car[1] }} - {{ car[2] }} - {{ car[3]}}</li>
+        {% endfor %}
+      </ul>
+  </p1>
+  <script>
+    const delUser=(id)=> {
+        console.log(`/del/${id}`)
+        axios.delete(`/del/${id}`).then(res => console.log(res.data))
+
+        
+    }
+</script>
+{% endblock %}
+
